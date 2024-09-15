@@ -16,14 +16,30 @@ pie
 * регистрация;
 * прослушивать музыку;
 * создавать плейлисты;
-* серверная история прослушивания;
-* рекомендации;
+* серверная история недавно прослушанных песен;
+* плейлисты с рекомендациями;
 * статистика по исполнителю;
 * загрузка музыки;
 * поиск музыки.
 ### Ключевые продуктовые решения
 * композиции хранятся на серверах продукта.
+## 2.Расчет нагрузки
+### Продуктовые метрики
+| Метрика                                          	|             Значение метрики 	|
+|--------------------------------------------------	|-----------------------------:	|
+| Месячная аудитория                               	|                      626 млн 	|
+| Дневная аудитория                                	|                     15.7 млн 	|
+| Средний размер хранилища на пользователя         	|                       ~30 МБ 	|
+| Среднее время прослушивания за день              	| 148 минут (~40 разных песен) 	|
+| Среднее количество созданных плейлистов за день* 	|                       63 млн 	|
+| Среднее число регистраций за день                	|                   ~130 тысяч 	|
+
+\* *включает в себя созданные пользователями и сгенерированные системой рекомендаций плейлисты*
+### Технические метрики
 ## Используемая литература
-[1. Spotify](https://open.spotify.com/)
-  
-[2. Квартальный отчет](https://investors.spotify.com/financials/default.aspx#quarterly-results)
+1. [Spotify](https://open.spotify.com/)
+2. [Квартальный отчет](https://investors.spotify.com/financials/default.aspx#quarterly-results)
+3. [Hypestat](https://hypestat.com/info/spotify.com)
+4. [Insights into Spotify Listening Statistics: Millions of Users and Tracks](https://wifitalents.com/statistic/spotify-listening/)
+5. [Exploring Eye-Opening Spotify Playlist Statistics: 4 Billion Playlists Created](https://gitnux.org/spotify-playlist-statistics/)
+
