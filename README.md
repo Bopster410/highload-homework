@@ -47,6 +47,13 @@ pie
 | Пользователи 	| 626 млн × 20  МБ = 12520	|
 | Музыка 	| 108 млн × 13.5  МБ = 1458 	|
 
+За последние несколько лет средний прирост пользователей составлял 15-20%. Если такой темп роста сохранится, то через год можно ожидать общей активной аудитории сервиса в районе 700 млн. Для расчета роста хранилища композиций учтем, что каждый день исполнители добавляют в среднем 60 тыс. новых песен[^7], что должно привести к росту библиотеки сервиса на 21.9 млн треков за год.
+
+| Хранилище 	| Прирост за год, ТБ 	|
+|---	|---	|
+| Пользователи 	| 74 млн × 20  МБ = 1480	|
+| Музыка 	| 21.9 млн × 13.5  МБ = 295.65 	|
+
 #### Сетевой трафик
 Для вычисления сетевого трафика прежде всего с помощью ручного замера инструментами разработчика браузера были получены средние размеры ответов на различные действия пользователя:
 | Действие пользователя 	| Средний размер ответа, Кбайт 	|
@@ -74,7 +81,7 @@ pie
 * **accounts.spotify.com** - регистрация и авторизация пользователей;
 * **open.spotify.com** - для прослушивания музыки и связанных с этим действий.
 ### Обоснования расположения ДЦ
-Согласно данным о распределении пользователей сервиса по странам[^7], разумнее всего в первую очередь использовать датацентры в США, Бразилии, Мексике, Великобритании и Индии. Более того, следует учесть расположение подводных кабелей[^8] и общее распределение трафика по различным частям света (п. 1). В результате были выбраны датацентры в городах:
+Согласно данным о распределении пользователей сервиса по странам[^8], разумнее всего в первую очередь использовать датацентры в США, Бразилии, Мексике, Великобритании и Индии. Более того, следует учесть расположение подводных кабелей[^9] и общее распределение трафика по различным частям света (п. 1). В результате были выбраны датацентры в городах:
 * Хилсборо (США);
 * Масатлан (Мексика);
 * Форталеза (Бразилия);
@@ -178,5 +185,6 @@ pie
 [^4]: [Insights into Spotify Listening Statistics: Millions of Users and Tracks](https://wifitalents.com/statistic/spotify-listening/)
 [^5]: [Exploring Eye-Opening Spotify Playlist Statistics: 4 Billion Playlists Created](https://gitnux.org/spotify-playlist-statistics/)
 [^6]: [How Much Data Does Spotify Use?](https://www.whistleout.com.au/MobilePhones/Guides/How-Much-Data-Does-Spotify-Use)
-[^7]: [Spotify Users by Country 2024](https://worldpopulationreview.com/country-rankings/spotify-users-by-country)
-[^8]: [Submarine Cable Map](https://www.submarinecablemap.com/)
+[^7]: [Over 60,000 tracks are now uploaded to Spotify every day. That’s nearly one per second.](https://www.musicbusinessworldwide.com/over-60000-tracks-are-now-uploaded-to-spotify-daily-thats-nearly-one-per-second/)
+[^8]: [Spotify Users by Country 2024](https://worldpopulationreview.com/country-rankings/spotify-users-by-country)
+[^9]: [Submarine Cable Map](https://www.submarinecablemap.com/)
