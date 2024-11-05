@@ -1,4 +1,4 @@
-# ДЗ по курсу "Хайлоад"
+![image](https://github.com/user-attachments/assets/10760c1a-4088-4ee0-8d85-a883ee375407)# ДЗ по курсу "Хайлоад"
 ## Содержание
 1. [Тема и целевая аудитория](#1-тема-и-целевая-аудитория)
 2. [Расчет нагрузки](#2-расчет-нагрузки)
@@ -143,25 +143,40 @@ pie
 ## 5. Логическая схема БД
 ![image](https://github.com/user-attachments/assets/bb3a73aa-0720-494e-88d2-cda69b0b0275)
 
-
-| Таблица       	|             Требования конситентности             	|                 Размеры данных (Гб)                 	    |
-|---------------	|:-------------------------------------------------:	|:--------------------------------------------------------:	|
-| User          	| id - PK email - уникальный  username - уникальный 	|   626 млн * (8 + (64 + 4) + (64 + 4) + (128 + 4)) байт = 172.8  |
-| Profile       	|                      id - PK                      	| 626 млн * (8 + 2 + 4 + (64 + 4) + (255 + 4) + 1 + 8 + 8) байт =   	|
-| Session       	|             user_id и session_id - PK             	|              15.7 млн * (8 + (64 + 4) + 1) байт =              	|
-| Music         	|                      id - PK                      	| 108 млн * (8 + (64 + 4) + (255 + 4) + 2 + 8 + 8 + 1 + 8 + 8) байт =  	|
-| Album         	|                      id - PK                      	|   8 млн * ((8 + (64 + 4) + (255 + 4) + 8 + 1 + 8 + 8) * 4) байт =     	|
-| Artist        	|                      id - PK                      	|      8 млн * (8 + (64 + 4) + (255 + 4) + (128 + 4) + 1 + 8 + 8) байт =      	|
-| Genre         	|                      id - PK                      	|              5000 * (8 + (64 + 4) + 1) байт =              	|
-| Playlist      	|                      id - PK                      	|    8 млрд * (8 + (64 + 4) + (255 + 4) + 8 + 1 + 1 + 8 + 8) байт =    	|
-| PlaylistMusic 	|            playlist_id и music_id - PK            	|            8 млрд * ((8 + 8 + 1) * 50) байт =             	|
-| FavoriteMusic 	|              user_id и music_id - PK              	|          626 млн * ((8 + 8 + 1) * 500) байт =            	|
-| WeeklyRecommendations 	|              user_id и music_id - PK              	|                     	|
-| DailyRecommendations 	|              user_id и music_id - PK              	|                     	|
-| ListeningHistory 	|              user_id и music_id - PK              	|                     	|
+| Таблица 	| Требования конситентности 	|
+|---	|---	|
+| User 	| id - PK email - уникальный  username - уникальный 	|
+| Profile 	| id - PK 	|
+| Session 	| user_id и session_id - PK 	|
+| Music 	| id - PK 	|
+| Album 	| id - PK 	|
+| Artist 	| id - PK 	|
+| Genre 	| id - PK 	|
+| Playlist 	| id - PK 	|
+| PlaylistMusic 	| playlist_id и music_id - PK 	|
+| FavoriteMusic 	| user_id и music_id - PK 	|
+| WeeklyRecommendations 	| user_id и music_id - PK 	|
+| DailyRecommendations 	| user_id и music_id - PK 	|
+| ListeningHistory 	| user_id и music_id - PK 	|
 
 ## 6. Физическая схема БД
 ![image](https://github.com/user-attachments/assets/c93f5fe4-25d8-4c34-9008-2f464be9bbbe)
+### Расчет размера данных
+| Таблица 	| Размеры данных (Гб) 	|
+|---	|---	|
+| User 	| 626 млн * (8 + (64 + 4) + (64 + 4) + (128 + 4)) байт = 172.8 	|
+| Profile 	| 626 млн * (8 + 2 + 4 + (64 + 4) + (255 + 4) + 1 + 8 + 8) байт = 	|
+| Session 	| 15.7 млн * (8 + (64 + 4) + 1) байт = 	|
+| Music 	| 108 млн * (8 + (64 + 4) + (255 + 4) + 2 + 8 + 8 + 1 + 8 + 8) байт = 	|
+| Album 	| 8 млн * ((8 + (64 + 4) + (255 + 4) + 8 + 1 + 8 + 8) * 4) байт = 	|
+| Artist 	| 8 млн * (8 + (64 + 4) + (255 + 4) + (128 + 4) + 1 + 8 + 8) байт = 	|
+| Genre 	| 5000 * (8 + (64 + 4) + 1) байт = 	|
+| Playlist 	| 8 млрд * (8 + (64 + 4) + (255 + 4) + 8 + 1 + 1 + 8 + 8) байт = 	|
+| PlaylistMusic 	| 8 млрд * ((8 + 8 + 1) * 50) байт = 	|
+| FavoriteMusic 	| 626 млн * ((8 + 8 + 1) * 500) байт = 	|
+| WeeklyRecommendations 	|  	|
+| DailyRecommendations 	|  	|
+| ListeningHistory 	|  	|
 ### Индексы
 | Таблица 	| Индексы 	|
 |---	|---	|
@@ -209,6 +224,9 @@ pie
 | Netflix Priam 	| создание реплик Cassanrda  	| глубокая интеграция с Cassandra 	|
 | Redis 	| хранение данных сессии 	| высокопроизводительная in-memory база данных 	|
 | Clickhouse 	| хранение данных для OLAP-запросов 	| высокопроизводительная аналитическая база данных 	|
+| Amazon S3 	| хранение оригиналов композиций	| масштабируемость, надежность, простая интеграция с Akamai 	|
+| Prometheus 	| метрики 	| удобный механизм для сбора и хранения различных даннх продукта 	|
+| Grafana 	| метрики 	| удобный механизм для визуализации собранных метрик 	|
 
 [^1]: [Spotify](https://open.spotify.com/)
 [^2]: [Квартальный отчет](https://investors.spotify.com/financials/default.aspx#quarterly-results)
