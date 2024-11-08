@@ -235,7 +235,8 @@ pie
 | Grafana 	| метрики 	| удобный механизм для визуализации собранных метрик 	|
 
 ## 9. Схема проекта
-![highload_10 drawio](https://github.com/user-attachments/assets/244412ec-b46e-496c-a5bc-04df3a7f8ff1)
+![highload_10 drawio](https://github.com/user-attachments/assets/91877937-7082-4413-9167-05748cf08a02)
+### Пояснение к микросервисам
 | Микросервис 	| Функционал 	|
 |---	|---	|
 | Authentication 	| Аутентификация и авторизация пользователей;<br>управление сессиями 	|
