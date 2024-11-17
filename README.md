@@ -225,7 +225,7 @@ pie
 ### Терминация SSL
 Терминация SSL будет производиться при помощи session tickets. Это позволит ускорить процесс аутентификации и избавить сервер от необходимости кэшировать сессии.
 ## 5. Логическая схема БД
-![image](https://github.com/user-attachments/assets/bb3a73aa-0720-494e-88d2-cda69b0b0275)
+![schema3](https://github.com/user-attachments/assets/a3bb0885-a113-4dbe-8c0f-8dea809c31e4)
 
 | Таблица 	| Требования конситентности 	|
 |---	|---	|
@@ -244,7 +244,7 @@ pie
 | ListeningHistory 	| user_id и music_id - PK 	|
 
 ## 6. Физическая схема БД
-![highload_shema](https://github.com/user-attachments/assets/8add1085-4191-4456-b42a-dd214eca9a21)
+![highload_shema](https://github.com/user-attachments/assets/f0a9f381-f13b-400f-8f22-bf18abc43057)
 
 ### Расчет размера данных
 | Таблица 	| Размеры данных (Гб) 	|
