@@ -242,6 +242,7 @@ pie
 | WeeklyRecommendations 	| user_id и music_id - PK 	|
 | DailyRecommendations 	| user_id и music_id - PK 	|
 | ListeningHistory 	| user_id и music_id - PK 	|
+| RecentActivity 	| user_id - PK 	|
 
 ## 6. Физическая схема БД
 ![highload_shema](https://github.com/user-attachments/assets/f0a9f381-f13b-400f-8f22-bf18abc43057)
@@ -262,6 +263,7 @@ pie
 | WeeklyRecommendations 	|  	|
 | DailyRecommendations 	|  	|
 | ListeningHistory 	|  	|
+| RecentActivity 	| user_id - PK= 	|
 ### Индексы
 | Таблица 	| Индексы 	|
 |---	|---	|
