@@ -225,7 +225,7 @@ pie
 ### Терминация SSL
 Терминация SSL будет производиться при помощи session tickets. Это позволит ускорить процесс аутентификации и избавить сервер от необходимости кэшировать сессии.
 ## 5. Логическая схема БД
-![schema3](https://github.com/user-attachments/assets/a3bb0885-a113-4dbe-8c0f-8dea809c31e4)
+![sch1](https://github.com/user-attachments/assets/bfd6e66b-6341-4455-b5a9-63c2b7e1ddb1)
 
 | Таблица 	| Требования конситентности 	|
 |---	|---	|
@@ -242,18 +242,17 @@ pie
 | WeeklyRecommendations 	| user_id и music_id - PK 	|
 | DailyRecommendations 	| user_id и music_id - PK 	|
 | ListeningHistory 	| user_id и music_id - PK 	|
-| RecentActivity 	| user_id - PK 	|
+| UserPreferences 	| user_id - PK 	|
+| MusicFeatures 	| music_id - PK 	|
+| UserInteraction 	| id - PK 	|
 
 ## 6. Физическая схема БД
-![highload_shema](https://github.com/user-attachments/assets/f0a9f381-f13b-400f-8f22-bf18abc43057)
-> _пунктирные линии_ - репликация данных;  
-> _сплошные линии_ - прямой поток данных (или связь полей таблицы).
-
-_Пояснение:_  
-* в таблице ListeningHistory будет сохраняться история прослушивания за 30 дней на пользователя;
-* для проведения более тщательного анализа в ClickHouse будем сохранять историю пользователей за более длительный срок (например, за несколько лет);
-* в RecentActivity будем сохранять по 20 последних действий пользователя (на каждый вид) в формате списка сериализованных JSON-ов из Kafka (List\<Text\>);
-* оригиналы статики созранены в S3-хранилище.
+![highload_shema drawio](https://github.com/user-attachments/assets/ed3888a6-e41d-43fb-9f77-08c1b84e3734)
+> _Примечание:_  
+> * в таблице ListeningHistory сохраняется история прослушивания за 30 дней на пользователя;
+> * в ClickHouse сохраняется история пользователей за более длительный срок (например, за несколько лет);
+> * в UserInteraction сохраняются действия пользователя за последние несколько дней;
+> * оригиналы статики сохранены в S3-хранилище.
 
 ### Выбор СУБД
 #### Основное хранилище данных
@@ -284,7 +283,7 @@ _Таблица:_ Session
 _СУБД:_ ElasticSearch  
 _Таблицы (реплики):_ Music, Artist, Album, Playlist  
 #### Действия пользователей
-Отслеживать действия пользователей удобно будет при помощи **Kafka**. Данные о них будут передаваться в ClickHouse (полная история для аналитики) и в Cassandra в таблицу RecentActivity (по 20 записей для каждого вида дейтсвий). 
+Отслеживать действия пользователей удобно будет при помощи **Kafka**. Данные о них будут передаваться в ClickHouse (полная история для аналитики) и в Cassandra в таблицу UserInteraction. 
 #### Аналитика
 Для больших OLAP-запросов лучше всего подойдет **ClickHouse** благодаря высокой скорости обработки больших объемов данных.
 
@@ -308,12 +307,14 @@ _Таблицы (реплики):_ ListeningHistory, FavoriteMusic, Profile, Mus
 | WeeklyRecommendations 	| **user_id** - для поиска музыки из списка рекомендаций конкретного пользователя 	|
 | DailyRecommendations 	| **user_id** - для поиска музыки из списка рекомендаций конкретного пользователя 	|
 | ListeningHistory 	| **user_id** - для поиска музыки из истории конкретного пользователя 	|
-| RecentActivity 	| **user_id** - для поиска по конкретному пользователю 	|
+| UserPreferences 	| **user_id** - для поиска по конкретному пользователю 	|
+| MusicFeatures 	| **music_id** - для поиска по id песни 	|
+| UserInteraction 	| **user_id** - для поиска по конкретному пользователю 	|
 
 ### Денормализация
-В целях обеспечения более быстрого поиска и уменьшения количества JOIN-ов для таблиц PlaylistMusic, FavoriteMusic, ListeningHistory, DailyRecommendations, WeeklyRecommendations были добавлены поля artist_name, album_image и duration; в таблицу Music были добавлены поля artist_name, artist_image, album_name и album_image.
-
-По этим же причинам вместо сохранения id песен в таблицу RecentActivity будем напрямую добавлять мета-информацию о прослушанном/лайкнутом/дизлайкнутом/пропущенном треках в формате сериализованного JSON-а. Это позволит добиться оптимальной скорости обработки данных для составления плейлистов с рекомендациями. Вместо промежуточных таблиц будут использованы List-ы, так как это позволит сократить число чтений данных из таблицы и упростит взаимодействие с Kafka. 
+В целях обеспечения более быстрого поиска и уменьшения количества JOIN-ов:
+* для таблиц PlaylistMusic, FavoriteMusic, ListeningHistory, DailyRecommendations, WeeklyRecommendations были добавлены поля artist_name, album_image и duration;
+* в таблицу Music были добавлены поля artist_name, artist_image, album_name и album_image.
 ### Шардирование
 Данные таблиц будем шардировать в зависимости от идентификатора.
 ### Партиционирование
