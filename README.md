@@ -438,7 +438,8 @@ _Таблицы (реплики):_ ListeningHistory, FavoriteMusic, Profile, Mus
 | Grafana 	| метрики 	| удобный механизм для визуализации собранных метрик 	|
 
 ## 9. Схема проекта
-![highload_10 drawio](https://github.com/user-attachments/assets/91877937-7082-4413-9167-05748cf08a02)
+![highload_shema drawio](https://github.com/user-attachments/assets/9fdc2388-d8e4-4c6e-9d1b-8efc4879174a)
+
 ### Пояснение к микросервисам
 | Микросервис 	| Функционал 	|
 |---	|---	|
