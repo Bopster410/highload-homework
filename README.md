@@ -84,6 +84,7 @@ pie
 | Создание плейлиста 	| 1.3&nbsp;млн × 20&nbsp;КБ = 26 	| 26 × 8 ÷ 86&nbsp;400&nbsp;с = 0.0024 	| 0.006 	| 1.3&nbsp;млн ÷ 86&nbsp;400&nbsp;с = 15 	|
 | Добавление/удаление из плейлиста 	| 31.4&nbsp;млн × 5.2&nbsp;КБ = 163.3 	| 163.3 × 8 ÷ 86&nbsp;400&nbsp;с = 0.015 	| 0.05 	| 31.4&nbsp;млн ÷ 86&nbsp;400&nbsp;с = 363 	|
 | Регистрация/авторизация 	| 15.83&nbsp;млн × 16&nbsp;КБ = 253.3 	| 253.3 × 8 ÷ 86&nbsp;400&nbsp;с = 0.024 	|  0.072 	| 15.83&nbsp;млн ÷ 86&nbsp;400&nbsp;с = 183 	|
+| Запрос страницы артиста 	| 15.7&nbsp;млн × 2 × 800&nbsp;КБ = 23&nbsp;956 	| 23&nbsp;956 × 8 ÷ 86&nbsp;400&nbsp;с = 2.2 	|  4.4 	| 15.7&nbsp;млн × 2 ÷ 86&nbsp;400&nbsp;с = 363 	|
 
 > \* запрос данных песни происходит каждые 10 секунд (6 раз в минуту)  
 
@@ -494,6 +495,28 @@ _Таблицы (реплики):_ ListeningHistory, FavoriteMusic, Profile, Mus
 | БД 	| - создание бекап-реплик для возможности восстановления данных;<br>- создание горячих реплик для возможности быстрой замены БД;<br>- шардирование данных на основе идентификатора;<br>- партиционирование данных рекомендаций на основе даты их создания; 	|
 | Статика<br>(музыка, аватарки) 	| оригиналы данных хранятся в централизованном S3-хранилище. 	|
 
+## 11. Список серверов
+### Базовый расчет нагрузки
+| Технология 	| Характер Сервиса 	| RPS 	| RAM, МБайт 	|
+|---	|---	|---	|---	|
+| Go 	| тяжелая бизнес-логика 	| 1 	| 30 	|
+| Go 	| средняя бизнес-логика 	| 100 	| 50 	|
+| Nginx 	| SSL handshake 	| 500 	| 10 	|
+| Go 	| легкое JSON API 	| 5000 	| 200 	|
+
+| Сервис 	| Целевая пиковая нагрузка приложения 	| CPU 	| RAM 	| Net, Гбит/с 	|
+|---	|---	|---	|---	|---	|
+| Authentication 	| 183 	|  	|  	| 0.072 	|
+| Music listening 	| 161361 	|  	|  	| 5809 	|
+| Profile 	| 182 + 3 = 185 	| 185 	| 7.4 	| 1.1 	|
+| Artist 	| 363 	|  	|  	| 2.2 	|
+| Playlists 	| 15 + 363 = 378 	|  	|  	| 0.006 + 0.05 	|
+| Media storage 	|  	|  	|  	|  	|
+| Search 	| 727 	|  	|  	| 26.17 	|
+| Recommendations 	| 15.7 млн / 86400 = 182 	|  	|  	|  	|
+| Metrics 	|  	|  	|  	|  	|
+| Analytics 	|  	|  	|  	|  	|
+
 [^1]: [Spotify](https://open.spotify.com/)
 [^2]: [Квартальный отчет](https://investors.spotify.com/financials/default.aspx#quarterly-results)
 [^3]: [Hypestat](https://hypestat.com/info/spotify.com)
@@ -504,3 +527,4 @@ _Таблицы (реплики):_ ListeningHistory, FavoriteMusic, Profile, Mus
 [^8]: [Spotify Users by Country 2024](https://worldpopulationreview.com/country-rankings/spotify-users-by-country)
 [^9]: [Submarine Cable Map](https://www.submarinecablemap.com/)
 [^10]: [List of countries and dependencies by population density](https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population_density)
+[^11]: [Techempower Benchmarks](https://www.techempower.com/benchmarks/#section=data-r22&test=fortune&hw=ph)
